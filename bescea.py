@@ -22,7 +22,7 @@ if not os.path.exists('models'):
     os.makedirs('models')
 
 # Import data and rename column, ensure it is text
-df = pd.read_csv(csv_file_location)
+df = pd.read_csv(csv_file_location, encoding = 'iso-8859-1')
 df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 df.text = df.text.astype(str) 
 
@@ -97,13 +97,16 @@ def besceaSearch(query_text):
   query = [ft_model[vec] for vec in input]
   query = np.mean(query,axis=0)
   t0 = time.time()
-  ids, distances = index.knnQuery(query, k=3)
+  ids, distances = index.knnQuery(query, k=return_results_count)
   t1 = time.time()
   print(f'Searched {df.shape[0]} records in {round(t1-t0,4) } seconds \n')
   for i,j in zip(ids,distances):
     output_id = round(j,4)
     output_text = df.text.values[i]
     output_score = round(j,4)
+    output_list.append([output_id, output_text, output_score])
+  output_df = pd.DataFrame(output_list, columns = ['id', 'text', 'score'])   
+  return(output_df)
 
 
 print("Data ready for searching")
