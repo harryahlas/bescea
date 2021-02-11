@@ -12,9 +12,9 @@ import os
 import nmslib
 import time
 
-# Variables
-searchname = "sample_search"
-csv_file_location = "data/sneap_sample_text.csv"
+# # Variables specified in R
+# searchname = "sample_search"
+# csv_file_location = "data/sneap_sample_text.csv"
 
 # Create models directory
 if not os.path.exists('models'):
@@ -31,7 +31,7 @@ tok_text=[] # for our tokenised corpus
 # Tokenising using SpaCy:
 for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner"])):
   tok = [t.text for t in doc if (t.is_ascii and not t.is_punct and not t.is_space)]
-tok_text.append(tok)
+  tok_text.append(tok)
 
 # BM25Okapi for searching
 bm25 = BM25Okapi(tok_text)
@@ -53,7 +53,7 @@ ft_model.build_vocab(tok_text) # tok_text is our tokenized input text - a list o
 # Train fasttext
 ft_model.train(
   tok_text,
-  epochs=1,
+  epochs=20,
   total_examples=ft_model.corpus_count, 
   total_words=ft_model.corpus_total_words)
 
@@ -64,9 +64,9 @@ ft_model = FastText.load('models/_fasttext_' + searchname + '_.model') #load
 # Most similar words
 #ft_model.wv.most_similar("guitar", topn=20, restrict_vocab=5000)
 
+# Create vectors
 weighted_doc_vects = []
 
-# Create vectors
 for i,doc in (enumerate(tok_text)):
   doc_vector = []
   for word in doc:
@@ -78,7 +78,7 @@ for i,doc in (enumerate(tok_text)):
   weighted_doc_vects.append(doc_vector_mean)
 
 # Save vectors
-pickle.dump( weighted_doc_vects, open( "models/weighted_doc_vects_" + searchname +"_.p", "wb" ) ) #save the results to disc
+pickle.dump(weighted_doc_vects, open( "models/weighted_doc_vects_" + searchname +"_.p", "wb" ) ) #save the results to disc
 
 # create a matrix from our document vectors
 data = np.vstack(weighted_doc_vects)
@@ -88,19 +88,19 @@ index = nmslib.init(method='hnsw', space='cosinesimil')
 index.addDataPointBatch(data)
 index.createIndex({'post': 2}, print_progress=True)
 
-
+# Search function
 def besceaSearch(query_text):
-  input = 'query_text'.lower().split()
+  input = query_text.lower().split()
   query = [ft_model[vec] for vec in input]
   query = np.mean(query,axis=0)
   t0 = time.time()
-  ids, distances = index.knnQuery(query, k=10)
+  ids, distances = index.knnQuery(query, k=3)
   t1 = time.time()
   print(f'Searched {df.shape[0]} records in {round(t1-t0,4) } seconds \n')
   for i,j in zip(ids,distances):
-    print(round(j,2))
-  print(df.text.values[i])
+    print(round(j,4))
+    print(df.text.values[i])
 
 
-print("Documents ready for searching")
+print("Data ready for searching")
   
