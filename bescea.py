@@ -15,6 +15,7 @@ import time
 # # Variables specified in R
 # searchname = "sample_search"
 # csv_file_location = "data/sneap_sample_text.csv"
+# return_results_count = 10
 
 # Create models directory
 if not os.path.exists('models'):
@@ -22,6 +23,7 @@ if not os.path.exists('models'):
 
 # Import data and rename column, ensure it is text
 df = pd.read_csv(csv_file_location)
+df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 df.text = df.text.astype(str) 
 
 nlp = spacy.load("en_core_web_sm")
@@ -41,7 +43,7 @@ ft_model = FastText(
   sg=1, # use skip-gram: usually gives better results
   size=100, # embedding dimension (default)
   window=10, # window size: 10 tokens before and 10 tokens after to get wider context
-  min_count=2, # only consider tokens with at least n occurrences in the corpus
+  min_count=min_fasttext_word_count, # only consider tokens with at least n occurrences in the corpus
   negative=15, # negative subsampling: bigger than default to sample negative examples more
   min_n=2, # min character n-gram
   max_n=5 # max character n-gram
@@ -53,7 +55,7 @@ ft_model.build_vocab(tok_text) # tok_text is our tokenized input text - a list o
 # Train fasttext
 ft_model.train(
   tok_text,
-  epochs=20,
+  epochs=fasttext_epochs,
   total_examples=ft_model.corpus_count, 
   total_words=ft_model.corpus_total_words)
 
@@ -90,6 +92,7 @@ index.createIndex({'post': 2}, print_progress=True)
 
 # Search function
 def besceaSearch(query_text):
+  output_list = []
   input = query_text.lower().split()
   query = [ft_model[vec] for vec in input]
   query = np.mean(query,axis=0)
@@ -98,8 +101,9 @@ def besceaSearch(query_text):
   t1 = time.time()
   print(f'Searched {df.shape[0]} records in {round(t1-t0,4) } seconds \n')
   for i,j in zip(ids,distances):
-    print(round(j,4))
-    print(df.text.values[i])
+    output_id = round(j,4)
+    output_text = df.text.values[i]
+    output_score = round(j,4)
 
 
 print("Data ready for searching")
