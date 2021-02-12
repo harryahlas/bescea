@@ -1,21 +1,28 @@
 source("besceaLoad.R")
+source("besceaApp.R")
 source("besceaSearch.R")
 
+# Import small sample of data
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
-
 sample_rows <- sample(1:nrow(data_for_search), 2000)
 
+# Load data and create model
 besceaLoad(data = data_for_search[sample_rows,], 
            text_field = "thread_text",
            unique_id = "textid", 
            min_word_count = 3,
-           epochs = 10)
+           epochs = 1)
 
+# Run shiny app. 
+# Run only in your browser and close from your browser as it may cause R to crash if you close it in R/RStudio
+besceaApp(50) 
+
+# Or do a manual run
 besceaSearch("guitar tune", 5)
 
 DT::datatable(besceaSearch("amp cab speaker cone"))
 
-besceaApp(50)
+
 
 library(reticulate)
 

@@ -39,4 +39,6 @@ besceaLoad <- function(data,
   
   py_run_file("bescea.py") # Run model
   
+  bescea_loaded <<- TRUE 
+  
 }

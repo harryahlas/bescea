@@ -1,5 +1,6 @@
 besceaApp <- function(results_count = NULL) {
 
+  if(!exists("bescea_loaded")) {stop("You need to successfully run besceaLoad() first")}#; break}
   
   library(shiny)
   library(reticulate)
