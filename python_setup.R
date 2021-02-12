@@ -1,3 +1,22 @@
+source("besceaLoad.R")
+source("besceaSearch.R")
+
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+
+sample_rows <- sample(1:nrow(data_for_search), 2000)
+
+besceaLoad(data = data_for_search[sample_rows,], 
+           text_field = "thread_text",
+           unique_id = "textid", 
+           min_word_count = 3,
+           epochs = 10)
+
+besceaSearch("guitar tune", 5)
+
+DT::datatable(besceaSearch("amp cab speaker cone"))
+
+besceaApp(50)
+
 library(reticulate)
 
 
@@ -11,7 +30,7 @@ py_run_string("id_column_name = 'textid'")
 # Optional Parameters
 py_run_string("return_results_count = 10")
 py_run_string("min_fasttext_word_count = 3") # only consider tokens with at least n occurrences in the corpus
-py_run_string("fasttext_epochs = 25")
+py_run_string("fasttext_epochs = 1")
 
 
 source_python("bescea.py")

@@ -20,7 +20,7 @@ ui <- shinyUI(fluidPage(
   verticalLayout(
     h2("Bescea"),
     textInput("query", label = h4("Query"), value = ""),
-    submitButton("Submit"),
+    #submitButton("Submit"),
     actionButton("resultsButton", "Show Results")
   ),
   mainPanel(h4("Documents"),
