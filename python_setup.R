@@ -17,9 +17,10 @@ besceaLoad(data = data_for_search[sample_rows,],
 # Run only in your browser and close from your browser as it may cause R to crash if you close it in R/RStudio
 besceaApp(50) 
 
-# Or do a manual run
+# Or search within R
 besceaSearch("guitar tune", 5)
 
+# Or use DT 
 DT::datatable(besceaSearch("amp cab speaker cone"))
 
 
