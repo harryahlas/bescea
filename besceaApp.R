@@ -6,6 +6,8 @@ besceaApp <- function(results_count = NULL) {
   library(reticulate)
   library(DT)
   
+  library(writexl)
+  
   if(!is.null(results_count)) {
     py$return_results_count <- r_to_py(as.integer(results_count))
   }
@@ -20,7 +22,10 @@ besceaApp <- function(results_count = NULL) {
       
       # Side panel
       sidebarPanel(textInput("query", label = h4("Query"), value = ""),
+                   HTML("<br>"),
                    actionButton("resultsButton", "Show Results"),
+                   HTML("<br>"),
+                   downloadButton("dl", "Download"),
                    width = 3),
       
       # Main Panel
@@ -46,7 +51,13 @@ besceaApp <- function(results_count = NULL) {
         # Dropdown for how many rows to display
         options = list(pageLength = 7, info = FALSE, lengthMenu = list(c(25, 20, 15, 10, 5, -1), c("25", "20", "15", "10", "5", "All"))) #)
     )
-   
+    
+    # Print to excel file
+    output$dl <- downloadHandler(
+      filename = function() { "ae.xlsx"},
+      content = function(file) {write_xlsx(queryInput(), path = file)}
+    )
+    
     session$onSessionEnded(function() {
       stopApp()
     })
