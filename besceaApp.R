@@ -10,42 +10,43 @@ besceaApp <- function(results_count = NULL) {
     py$return_results_count <- r_to_py(as.integer(results_count))
   }
   
-  # # Required Parameters
-  # py_run_string("csv_file_location = 'C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv'")
-  # py_run_string("searchname = 'sample_search4'")
-  # py_run_string("text_column_name = 'thread_text'")
-  # py_run_string("id_column_name = 'textid'")
-  # 
-  # # Optional Parameters
-  # py_run_string("return_results_count = 10")
-  # py_run_string("min_fasttext_word_count = 3") # only consider tokens with at least n occurrences in the corpus
-  # py_run_string("fasttext_epochs = 1")
-  # py_run_file("bescea.py") # Run model
-  
-  
+
   ui <- shinyUI(fluidPage(
-    verticalLayout(
-      h2("Bescea"),
-      textInput("query", label = h4("Query"), value = ""),
-      actionButton("resultsButton", "Show Results")
-    ),
-    mainPanel(h4("Documents"),
-              tableOutput("resultsTable"))
     
-  ))
+    # Application title
+    titlePanel("Bescea"),
+   
+    sidebarLayout(
+      
+      # Side panel
+      sidebarPanel(textInput("query", label = h4("Query"), value = ""),
+                   actionButton("resultsButton", "Show Results"),
+                   width = 3),
+      
+      # Main Panel
+      mainPanel(h4("Documents"),
+                DT::dataTableOutput("resultsTable"),
+                width = 9)
+    )))
   
   server <- function(input, output, session) {
     
     queryInput <- eventReactive(input$resultsButton,{
       
-      data.frame(besceaSearch(input$query))
+      documents_retrieved <- data.frame(besceaSearch(input$query))
+      documents_retrieved$score <- round(documents_retrieved$score,3)
+      documents_retrieved
+      
     })
     
-    
-    output$resultsTable <- renderTable({
-      queryInput()
-    })
-    
+    output$resultsTable <- DT::renderDataTable(
+        queryInput() , 
+        filter = "top",
+        rownames= FALSE,
+        # Dropdown for how many rows to display
+        options = list(pageLength = 7, info = FALSE, lengthMenu = list(c(25, 20, 15, 10, 5, -1), c("25", "20", "15", "10", "5", "All"))) #)
+    )
+   
     session$onSessionEnded(function() {
       stopApp()
     })
