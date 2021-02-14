@@ -15,7 +15,7 @@ besceaApp(data = df,                      # data frame containing a text field a
 
 Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
 
-Based heavily on the work of Josh Taylor:
+Based heavily on the work of Josh Taylor (https://twitter.com/josh_taylor_01):
 
 https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac
 
