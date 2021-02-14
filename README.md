@@ -1,13 +1,15 @@
 # bescea
 Quick Smart Search Engine
 
-<code>source("besceaApp.R")
+Do a quick, smart search on texts of your choice. Ideal for survey comments. Input data should be an R data frmae with one id column and one text column.
+
+```r
+source("besceaApp.R")
 
 besceaApp(data = data_for_search[sample_rows,], # data frame containing a text field and a unique id field 
           text_field = "thread_text",           # name of field containing text data
           unique_id = "textid")</code>          # name of unique id field
-
-Do a quick, smart search on texts of your choice. Ideal for survey comments. Input data should be a csv with one id column and one text column.
+```
 
 Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
 
