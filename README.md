@@ -6,9 +6,11 @@ Do a quick, smart search on texts of your choice. Ideal for survey comments. Inp
 ```r
 source("besceaApp.R")
 
-besceaApp(data = data_for_search[sample_rows,], # data frame containing a text field and a unique id field 
-          text_field = "thread_text",           # name of field containing text data
-          unique_id = "textid")                 # name of unique id field
+df <- read.csv('data/sneap_sample_text.csv')
+
+besceaApp(data = df,                      # data frame containing a text field and a unique id field 
+          text_field = "thread_text",     # name of field containing text data
+          unique_id = "textid")           # name of unique id field
 ```
 
 Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
