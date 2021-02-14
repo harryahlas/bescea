@@ -16,5 +16,6 @@ Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *
 Based heavily on the work of Josh Taylor:
 
 https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac
+
 https://towardsdatascience.com/how-to-build-a-smart-search-engine-a86fca0d0795
 
