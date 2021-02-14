@@ -65,3 +65,80 @@ write_csv(x, "C:\\Users\\hahla\\Desktop\\github\\polyseis\\data\\sneap_text.csv"
 
 
 repl_python()
+
+
+
+### NEED TO GO THROUGH ALL SCENARIOS BELOW AGAIN
+
+# V2 Tested successfully ----------------------------------------------------
+
+source("besceaBuildModel.R")
+source("besceaLoadData.R")
+source("besceaSearch.R")
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+# This can run on its own. Need to try with model as well
+besceaLoadData(data = data_for_search[sample_rows,], 
+               text_field = "thread_text",
+               unique_id = "textid")
+
+# Or search within R
+besceaSearch("guitar tune", 5)
+
+
+# V3 Tested successfully ----------------------------------------------------
+
+source("besceaBuildModel.R")
+source("besceaLoadData.R")
+source("besceaSearch.R")
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+# Load data and create model
+besceaBuildModel(data = data_for_search[sample_rows,], 
+                 text_field = "thread_text",
+                 unique_id = "textid", 
+                 min_word_count = 1,
+                 epochs = 1, 
+                 modelname = "buildmodelfirst")
+
+# This can run on its own. Need to try with model as well
+besceaLoadData(data = data_for_search[sample_rows,], 
+               text_field = "thread_text",
+               unique_id = "textid", 
+               modelname = "buildmodelfirst", searchname = "usingbuildmodelfirst")
+
+# Or search within R
+besceaSearch("guitar tune", 5)
+
+
+# V4 Tested successfully --------------------------------------------------
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+source("besceaApp.R")
+
+besceaApp(data = data_for_search[sample_rows,], 
+          text_field = "thread_text",
+          unique_id = "textid")
+
+
+# V5 Tested successfully --------------------------------------------------
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+source("besceaApp.R")
+
+besceaApp(data = data_for_search[sample_rows,], 
+          text_field = "thread_text",
+          unique_id = "textid",
+          modelname = "my_model")
