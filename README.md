@@ -1,5 +1,5 @@
 # bescea
-Quick Smart Search Engine
+#### Quick Smart Search Engine
 
 Do a quick, smart search on texts of your choice. Ideal for survey comments. Input data should be an R data frmae with one id column and one text column.
 
