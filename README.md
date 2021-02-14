@@ -1,7 +1,7 @@
 # bescea
 #### Quick Smart Search Engine
 
-Do a quick, smart search on texts of your choice. Ideal for survey comments. Input data should be an R data frmae with one id column and one text column.
+Do a quick, smart search on texts of your choice. Ideal for survey comments. Not suitable for long documents unless they are split out into smaller sections. Input data should be an R data frame with one id column and one text column.
 
 ```r
 source("besceaApp.R")
