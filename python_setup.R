@@ -117,7 +117,7 @@ besceaLoadData(data = data_for_search[sample_rows,],
 besceaSearch("guitar tune", 5)
 
 
-#Tes Run app from scratch - Tested successfully --------------------------------
+#Test Run app from scratch - Tested successfully -------------------------------
 
 # Import small sample of data
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
@@ -129,6 +129,20 @@ besceaApp(data = data_for_search[sample_rows,],
           text_field = "thread_text",
           unique_id = "textid")
 
+
+#Test Run app from scratch and specify arguments in app call - NOT Tested successfully -------------------------------
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+source("besceaApp.R")
+
+besceaApp(data = data_for_search[sample_rows,], 
+          text_field = "thread_text",
+          unique_id = "textid",
+          min_word_count = 6,
+          epochs = 3)
 
 
 # Run app on previously saved model - Tested successfully ----------------------
@@ -143,6 +157,22 @@ besceaApp(data = data_for_search[sample_rows,],
           text_field = "thread_text",
           unique_id = "textid",
           modelname = "buildmodelfirst")
+
+
+# Run app and switch count of output rows - Tested successfully ----------------
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+source("besceaApp.R")
+
+besceaApp(data = data_for_search[sample_rows,], 
+          text_field = "thread_text",
+          unique_id = "textid",
+          modelname = "buildmodelfirst",
+          results_count = 3)
+
 
 
 # Load a different spacy model from different location' - Tested successfully --

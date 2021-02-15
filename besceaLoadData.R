@@ -2,7 +2,7 @@ besceaLoadData <- function(data,
                            text_field = text_field,
                            unique_id = unique_id, 
                            modelname = NULL, 
-                           searchname = "my_search") {
+                           searchname = "my_search", ...) {
   
   if (!exists("text_field")) { stop("you need to provide a text_field argument")}
   if (!exists("unique_id")) { stop("you need to provide a unique_id argument")}
@@ -15,7 +15,7 @@ besceaLoadData <- function(data,
     modelname <- "my_model" 
     besceaBuildModel(data, 
                      text_field = text_field,
-                     unique_id = unique_id)
+                     unique_id = unique_id, ...)
   }
   
   # # If no searchname then call it "my_search"

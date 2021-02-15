@@ -3,7 +3,7 @@ besceaApp <- function(data,
                       unique_id,
                       modelname = NULL,
                       searchname = NULL,
-                      results_count = 50) {
+                      results_count = 50, ...) {
 
   source("besceaBuildModel.R")
   source("besceaLoadData.R")
@@ -13,7 +13,7 @@ besceaApp <- function(data,
   if(is.null(modelname)) {
     besceaLoadData(data = data, 
                    text_field = text_field,
-                   unique_id = unique_id)
+                   unique_id = unique_id, ...)
   } 
   
   # Else if you want to load an old model then do so and then load your new data
@@ -42,7 +42,7 @@ besceaApp <- function(data,
     
     # Application title
     titlePanel("Bescea"),
-   
+    
     sidebarLayout(
       
       # Side panel
