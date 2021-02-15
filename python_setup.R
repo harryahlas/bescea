@@ -117,7 +117,7 @@ besceaLoadData(data = data_for_search[sample_rows,],
 besceaSearch("guitar tune", 5)
 
 
-# V4 Tested successfully --------------------------------------------------
+#Tes Run app from scratch - Tested successfully --------------------------------
 
 # Import small sample of data
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
@@ -130,7 +130,8 @@ besceaApp(data = data_for_search[sample_rows,],
           unique_id = "textid")
 
 
-# V5 Tested successfully --------------------------------------------------
+
+# Run app on previously saved model - Tested successfully ----------------------
 
 # Import small sample of data
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
@@ -141,4 +142,25 @@ source("besceaApp.R")
 besceaApp(data = data_for_search[sample_rows,], 
           text_field = "thread_text",
           unique_id = "textid",
-          modelname = "my_model")
+          modelname = "buildmodelfirst")
+
+
+# Load a different spacy model from different location' - Tested successfully --
+
+source("besceaBuildModel.R")
+source("besceaLoadData.R")
+source("besceaSearch.R")
+
+# Import small sample of data
+data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
+sample_rows <- sample(1:nrow(data_for_search), 200)
+
+# Load data and create model
+besceaBuildModel(data = data_for_search[sample_rows,], 
+                 text_field = "thread_text",
+                 unique_id = "textid", 
+                 min_word_count = 1,
+                 epochs = 1, 
+                 modelname = "buildmodelfirst", 
+                 spacy_nlp_model = "C:\\Users\\hahla\\Desktop\\Toss\\en_core_web_sm\\en_core_web_sm-2.3.1")
+

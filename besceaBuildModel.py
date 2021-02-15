@@ -26,7 +26,7 @@ if not os.path.exists('models'):
 df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 df.text = df.text.astype(str) 
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load(spacy_nlp_model) # defaults to "en_core_web_sm"
 text_list = df.text.str.lower().values
 tok_text=[] # for our tokenised corpus
 
