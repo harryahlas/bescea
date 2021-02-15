@@ -50,6 +50,8 @@ besceaApp <- function(data,
                    HTML("<br>"),
                    actionButton("resultsButton", "Show Results"),
                    HTML("<br>"),
+                   textInput("resultsCountButton", label = h4("Number of Results to Show"), value = results_count),
+                   HTML("<br>"),
                    downloadButton("dl", "Download"),
                    width = 3),
       
@@ -61,9 +63,17 @@ besceaApp <- function(data,
   
   server <- function(input, output, session) {
     
+    # Number of results to show
+    resultsCountInput <- eventReactive(input$resultsCountButton,{
+      
+      input$resultsCountButton
+      
+    })
+    
+    
     queryInput <- eventReactive(input$resultsButton,{
       
-      documents_retrieved <- data.frame(besceaSearch(input$query, results_count))
+      documents_retrieved <- data.frame(besceaSearch(input$query, as.integer(resultsCountInput())))
       documents_retrieved$score <- round(documents_retrieved$score,3)
       documents_retrieved
       
