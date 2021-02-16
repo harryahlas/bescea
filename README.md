@@ -18,9 +18,9 @@ If you have not used R's *reticulate* package, please see the requirements secti
 
 ```r
 library(bescea)
-besceaApp(data = sneapsters,         # data frame. each document is a row/observation.
-          text_field = "post_text",  # text field from data frame
-          unique_id = "textid")      # unique identifier from data frame
+besceaApp(data = sneapsters,         # Data frame, each document is a row/observation.
+          text_field = "post_text",  # Text field from data frame
+          unique_id = "textid")      # Unique identifier from data frame
 ```
 
 ## Shiny App
@@ -49,7 +49,7 @@ You also have the ability to use a model that you have already built, perhaps on
 besceaApp(data = sneapsters, 
           text_field = "thread_text",
           unique_id = "textid",
-          modelname = "my_fasttext_model")
+          modelname = "my_fasttext_model")  # Name of already built model 
 ```
 
 ## Requirements
