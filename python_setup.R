@@ -171,7 +171,7 @@ besceaApp(data = data_for_search[sample_rows,],
           text_field = "thread_text",
           unique_id = "textid",
           modelname = "buildmodelfirst",
-          results_count = 3)
+          results_count = 30)
 
 
 

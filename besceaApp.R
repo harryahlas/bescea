@@ -2,7 +2,7 @@ besceaApp <- function(data,
                       text_field,
                       unique_id,
                       modelname = NULL,
-                      searchname = NULL,
+                      searchname = "Buscea",
                       results_count = 50, ...) {
 
   source("besceaBuildModel.R")
@@ -41,18 +41,21 @@ besceaApp <- function(data,
   ui <- shinyUI(fluidPage(
     
     # Application title
-    titlePanel("Bescea"),
+    titlePanel(paste(searchname, "Search")),
     
     sidebarLayout(
       
       # Side panel
       sidebarPanel(textInput("query", label = h4("Query"), value = ""),
-                   HTML("<br>"),
+                   #HTML("<br>"),
+                   textInput("resultsCountButton", 
+                             label = "# Results", 
+                             width = '75px',
+                             value = results_count),
+                   #HTML("<br>"),
                    actionButton("resultsButton", "Show Results"),
-                   HTML("<br>"),
-                   textInput("resultsCountButton", label = h4("Number of Results to Show"), value = results_count),
-                   HTML("<br>"),
-                   downloadButton("dl", "Download"),
+                   HTML("<br><br>"),
+                   downloadButton("dl", "Download to Excel"),
                    width = 3),
       
       # Main Panel
@@ -98,7 +101,7 @@ besceaApp <- function(data,
     })
   }
   
-  shinyApp(ui, server)  
+  shinyApp(ui, server, options = list(launch.browser = TRUE))  
   
 }
 
