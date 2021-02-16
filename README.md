@@ -1,4 +1,4 @@
-# bescea: Instant search engine for text
+# bescea: Instant text search engine
 
 **Author:** Harry Ahlas
 
