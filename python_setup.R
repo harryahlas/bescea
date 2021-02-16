@@ -153,12 +153,19 @@ besceaApp(data = data_for_search[sample_rows,],
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
 sample_rows <- sample(1:nrow(data_for_search), 200)
 
+sneapsters <- data_for_search %>% 
+  select(textid, post_text = thread_text) %>% 
+  sample_n(2000)
+
+sneapsters2 <- data.frame(sneapsters)
+
+usethis::use_data(sneapsters, overwrite = T)
 # source("besceaApp.R")
 
 besceaApp(data = data_for_search[sample_rows,], 
           text_field = "thread_text",
           unique_id = "textid",
-          modelname = "buildmodelfirst")
+          modelname = "my_model", searchname = "test_search")
 
 
 # Run app and switch count of output rows - Tested successfully ----------------
@@ -167,10 +174,8 @@ besceaApp(data = data_for_search[sample_rows,],
 data_for_search <- read.csv('C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv')
 sample_rows <- sample(1:nrow(data_for_search), 200)
 
-source("besceaApp.R")
-
-besceaApp(data = data_for_search[sample_rows,], 
-          text_field = "thread_text",
+besceaApp(data = sneapsters, 
+          text_field = "post_text",
           unique_id = "textid",
           modelname = "buildmodelfirst",
           results_count = 30)

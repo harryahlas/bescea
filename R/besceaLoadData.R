@@ -17,6 +17,8 @@ besceaLoadData <- function(data,
                            modelname = NULL, 
                            searchname = "my_search", ...) {
   
+  pythonModulesCheck() # Check python modules
+  
   if (!exists("text_field")) { stop("you need to provide a text_field argument")}
   if (!exists("unique_id")) { stop("you need to provide a unique_id argument")}
   

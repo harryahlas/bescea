@@ -21,6 +21,8 @@ besceaBuildModel <- function(data,
                              epochs = 25,
                              spacy_nlp_model = "en_core_web_sm") {
 
+  pythonModulesCheck() # Check python modules
+  
   library(reticulate)
   
   # Required Parameters
