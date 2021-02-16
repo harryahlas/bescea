@@ -18,11 +18,14 @@ devtools::install_github("harryahlas/bescea")
 
 ```r
 library(bescea)
-besceaApp(data = sneapsters, 
-          text_field = "post_text",
-          unique_id = "textid",
-          results_count = 30)
+besceaApp(data = sneapsters,         # data frame. each document is a row/observation.
+          text_field = "post_text",  # text field from data frame
+          unique_id = "textid")      # unique identifier from data frame
 ```
+
+## Shiny App
+
+The code above models your text using [SpaCy](https://spacy.io/) and [fastText](https://fasttext.cc/). It also uses [BM25Okapi](https://github.com/dorianbrown/rank_bm25) as a searching tool.  It then generates a [Shiny](https://shiny.rstudio.com/) app in your browser to search your text.
 
 ![buscea search example](images/search2.png)
 
