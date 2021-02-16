@@ -1,9 +1,23 @@
-# bescea
-#### Instant Search Engine
+# bescea: Instant search engine for text
 
-In a matter of a few minutes, build a quick, smart search on texts of your choice. Ideal for short user comments. Not suitable for long documents unless they are split out into smaller sections. Input data should be an R data frame with one id column and one text column.
+**Author:** Harry Ahlas
+
+**License:** [MIT](https://opensource.org/licenses/MIT)
+
+In a matter of a few minutes, build a quick, smart Shiny app to search through your own text data. Ideal for short user comments. Input data should be an R data frame with one id column and one text column. 
+
+## Installation
+
+If you have not used R's *reticulate* package, please see the requirements section below prior to installing.
 
 ```r
+devtools::install_github("harryahlas/bescea")
+```
+
+## Run buscea
+
+```r
+library(bescea)
 besceaApp(data = sneapsters, 
           text_field = "post_text",
           unique_id = "textid",
@@ -12,7 +26,11 @@ besceaApp(data = sneapsters,
 
 ![buscea search example](images/search2.png)
 
+## Requirements
+
 Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
+
+## Acknowledgements
 
 Based heavily on the work of Josh Taylor (https://twitter.com/josh_taylor_01):
 
