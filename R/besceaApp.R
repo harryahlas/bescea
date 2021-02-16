@@ -16,7 +16,7 @@ besceaApp <- function(data,
                       text_field,
                       unique_id,
                       modelname = NULL,
-                      searchname = "Buscea",
+                      searchname = "Bescea",
                       results_count = 50, ...) {
 
   # source("besceaBuildModel.R")
