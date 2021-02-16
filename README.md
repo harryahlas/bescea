@@ -14,7 +14,7 @@ devtools::install_github("harryahlas/bescea")
 
 If you have not used R's *reticulate* package, please see the requirements section below prior to installing.
 
-## Run buscea
+## Run bescea
 
 ```r
 library(bescea)
@@ -27,7 +27,7 @@ besceaApp(data = sneapsters,         # Data frame, each document is a row/observ
 
 The code above first tokenizes your text using [SpaCy](https://spacy.io/), then generates a [fastText](https://fasttext.cc/) model. It uses [BM25Okapi](https://github.com/dorianbrown/rank_bm25) as a searching tool.  Finally, it generates a [Shiny](https://shiny.rstudio.com/) app in your browser to search your text.  You can download an .xlsx file of your results by clicking the *Download* button.
 
-![buscea search example](images/search2.png)
+![bescea search example](images/search2.png)
 
 ## Build Model
 
