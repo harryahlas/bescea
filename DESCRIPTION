@@ -1,16 +1,21 @@
 Package: bescea
-Title: What the Package Does (One Line, Title Case)
+Title: Instant Search Engine
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Harry",
+           family = "Ahlas",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "hahlas@hotmail.com")
+Description: Quickly build a Shiny search engine using fasttext and SpaCy. Ideal for use on short comments. Can build a model using your own data or load a pretrained model. Based heavily on the work of Josh Taylor (https://twitter.com/josh_taylor_01, https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac)
+License: MIT License Copyright (c) 2021 Harry Ahlas
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
+Imports:
+    shiny,
+    reticulate,
+    DT,
+    writexl
