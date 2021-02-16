@@ -33,6 +33,25 @@ The code above first tokenizes your text using [SpaCy](https://spacy.io/), then 
 
 You have the option to run and save your own *fastText* model for use with other searches. This will speed up runtimes and often improve results. 
 
+```r
+besceaBuildModel(data = sneapsters, 
+                 text_field = "post_text",
+                 unique_id = "textid", 
+                 min_word_count = 3,              # Only consider tokens with at least n occurrences in the corpus
+                 epochs = 30,                     # Number of fasttext epochs. More is generally better.
+                 modelname = "my_fasttext_model") # Your model name, to be referred to when loading new data
+```
+## Run Using Prior Model
+
+You also have the ability to use a model that you have already built, perhaps one based on a large corpus.  The example below loads the model from the example above, saving time as the app does not have to run a brand new model.
+
+```r
+besceaApp(data = sneapsters, 
+          text_field = "thread_text",
+          unique_id = "textid",
+          modelname = "my_fasttext_model")
+```
+
 ## Requirements
 
 Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
