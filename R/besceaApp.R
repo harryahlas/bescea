@@ -1,3 +1,17 @@
+#' Bescea Shiny App
+#'
+#' App to search text
+#' @param data the name of df
+#' @param text_field x
+#' @param unique_id x
+#' @param modelname x
+#' @param searchname x
+#' @param results_count x
+#' @keywords text
+#' @export
+#' @examples
+#' besceaApp()
+
 besceaApp <- function(data,
                       text_field,
                       unique_id,
@@ -5,9 +19,9 @@ besceaApp <- function(data,
                       searchname = "Buscea",
                       results_count = 50, ...) {
 
-  source("besceaBuildModel.R")
-  source("besceaLoadData.R")
-  source("besceaSearch.R")
+  # source("besceaBuildModel.R")
+  # source("besceaLoadData.R")
+  # source("besceaSearch.R")
   
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {

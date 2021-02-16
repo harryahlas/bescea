@@ -1,3 +1,16 @@
+#' Load new data to bescea model
+#'
+#' Load new data to bescea model for seawrching
+#' @param data
+#' @param text_field
+#' @param unique_id
+#' @param modelname
+#' @param searchname
+#' @keywords text
+#' @export
+#' @examples
+#' besceaLoadData(...)
+
 besceaLoadData <- function(data, 
                            text_field = text_field,
                            unique_id = unique_id, 
@@ -18,25 +31,19 @@ besceaLoadData <- function(data,
                      unique_id = unique_id, ...)
   }
   
-  # # If no searchname then call it "my_search"
-  # if(is.null(searchname)) {searchname = "my_search"}
-  
   library(reticulate)
   
   # Required Parameters
-  py$df_docs <- r_to_py(data)
-  py$text_column_name <- r_to_py(text_field)
-  py$id_column_name <- r_to_py(unique_id)
+  py$df_docs <- reticulate::r_to_py(data)
+  py$text_column_name <- reticulate::r_to_py(text_field)
+  py$id_column_name <- reticulate::r_to_py(unique_id)
   
   # Optional Parameters
-  py$modelname <- r_to_py(modelname)
-  py$searchname <- r_to_py(searchname)
-  #py$return_results_count <- r_to_py(as.integer(results_count))
-  # py$min_fasttext_word_count <- r_to_py(as.integer(min_word_count))
-  # py$fasttext_epochs <- r_to_py(as.integer(epochs))
+  py$modelname <- reticulate::r_to_py(modelname)
+  py$searchname <- reticulate::r_to_py(searchname)
   
-  source_python("besceaLoadData.py")
-  source_python("besceaSearch.py")
-  
+  reticulate::source_python(paste0(system.file(package = packageName()), "/python/besceaLoadData.py"))
+  reticulate::source_python(paste0(system.file(package = packageName()), "/python/besceaSearch.py"))
+
 }
 
