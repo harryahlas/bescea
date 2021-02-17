@@ -4,7 +4,7 @@
 
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
-In a matter of a few minutes, build a quick, smart Shiny app to search through your own text data. Ideal for short user comments. Input data should be an R data frame with one id column and one text column. 
+In a matter of a few minutes, build a quick, smart Shiny app to search through your own text data. Ideally suited to search through a set of short comments for a query or theme. Input data should be an R data frame with one id column and one text column. 
 
 ## Installation
 
@@ -27,11 +27,13 @@ besceaApp(data = sneapsters,         # Data frame, each document is a row/observ
 
 The code above first tokenizes your text using [SpaCy](https://spacy.io/), then generates a [fastText](https://fasttext.cc/) model. It uses [BM25Okapi](https://github.com/dorianbrown/rank_bm25) as a searching tool.  Finally, it generates a [Shiny](https://shiny.rstudio.com/) app in your browser to search your text.  You can download an .xlsx file of your results by clicking the *Download* button.
 
-![bescea search example](images/search2.png)
+Longer queries tend to be more successful than short queries.  If a query like "data science" isn't working, try adding supplemental words to your query, such as "data science statistics code analytics".
+
+![](images/search2.png)
 
 ## Build Model
 
-You have the option to run and save your own *fastText* model for use with other searches. This will speed up runtimes and often improve results. 
+You have the option to run and save your own *fastText* model for use with other searches. This will speed up runtimes and often improve results. This example uses the *sneapsters* data set to build a model and search.
 
 ```r
 besceaBuildModel(data = sneapsters, 
