@@ -1,6 +1,6 @@
 # bescea: Instant text search engine
 
-**Author:** Harry Ahlas
+**Author:** [Harry Ahlas](http://harry.ahlas.com)
 
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
