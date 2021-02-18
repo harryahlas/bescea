@@ -28,9 +28,14 @@ besceaApp(
 \item{results_count}{x}
 }
 \description{
-App to search text
+Instant search engine
 }
 \examples{
-besceaApp()
+besceaApp(data = sneapsters[1:100,], 
+          text_field = "post_text",
+          unique_id = "textid",
+          epochs = 1,
+          min_word_count = 1,
+          searchname = "test_search")
 }
 \keyword{text}

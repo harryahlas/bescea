@@ -1,6 +1,6 @@
 #' Bescea Shiny App
 #'
-#' App to search text
+#' Instant search engine
 #' @param data the name of df
 #' @param text_field x
 #' @param unique_id x
@@ -10,7 +10,12 @@
 #' @keywords text
 #' @export
 #' @examples
-#' besceaApp()
+#' besceaApp(data = sneapsters[1:100,], 
+#'           text_field = "post_text",
+#'           unique_id = "textid",
+#'           epochs = 1,
+#'           min_word_count = 1,
+#'           searchname = "test_search")
 
 besceaApp <- function(data,
                       text_field,
@@ -19,10 +24,6 @@ besceaApp <- function(data,
                       searchname = "Bescea",
                       results_count = 50, ...) {
 
-  # source("besceaBuildModel.R")
-  # source("besceaLoadData.R")
-  # source("besceaSearch.R")
-  
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {
     besceaLoadData(data = data, 
@@ -36,7 +37,7 @@ besceaApp <- function(data,
                    text_field = text_field,
                    unique_id = unique_id,
                    modelname = modelname,
-                   searchname = searchname)
+                   searchname = searchname, ...)
   } 
   
   # This shouldn't occur
@@ -61,12 +62,10 @@ besceaApp <- function(data,
       
       # Side panel
       sidebarPanel(textInput("query", label = h4("Query"), value = ""),
-                   #HTML("<br>"),
                    textInput("resultsCountButton", 
                              label = "# Results", 
                              width = '75px',
                              value = results_count),
-                   #HTML("<br>"),
                    actionButton("resultsButton", "Show Results"),
                    HTML("<br><br>"),
                    downloadButton("dl", "Download to Excel"),

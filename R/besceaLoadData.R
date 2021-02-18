@@ -1,6 +1,6 @@
 #' Load new data to bescea model
 #'
-#' Load new data to bescea model for seawrching
+#' Load new data to bescea model for searching
 #' @param data
 #' @param text_field
 #' @param unique_id
@@ -9,13 +9,27 @@
 #' @keywords text
 #' @export
 #' @examples
-#' besceaLoadData(...)
+#' # Build model called "my_model" first
+#' besceaBuildModel(data = sneapsters[1:100,], 
+#'   text_field = "post_text",
+#'   unique_id = "textid", 
+#'   min_word_count = 1,
+#'   epochs = 1, 
+#'   modelname = "my_model")
+#'   
+#' # Then load data and run using "my_model"  
+#' besceaLoadData(data = sneapsters[1:100,], 
+#'   text_field = "post_text",
+#'   unique_id = "textid",
+#'   modelname = "my_model")
+
 
 besceaLoadData <- function(data, 
                            text_field = text_field,
                            unique_id = unique_id, 
                            modelname = NULL, 
-                           searchname = "my_search", ...) {
+                           searchname = "my_search", 
+                           spacy_nlp_model = NULL, ...) {
   
   pythonModulesCheck() # Check python modules
   
@@ -30,14 +44,24 @@ besceaLoadData <- function(data,
     modelname <- "my_model" 
     besceaBuildModel(data, 
                      text_field = text_field,
-                     unique_id = unique_id, ...)
+                     unique_id = unique_id,
+                     spacy_nlp_model = spacy_nlp_model,
+                     ...)
   }
   
   library(reticulate)
   
   # If user supplies a location for spacy then use it, otherwise use "en_core_web_sm"
-  if (exists("spacy_nlp_model")) {py$spacy_nlp_model <- r_to_py(spacy_nlp_model)}
-  else {py$spacy_nlp_model <-  r_to_py("en_core_web_sm") }
+  if (!is.null(spacy_nlp_model)) {py$spacy_nlp_model <- reticulate::r_to_py(spacy_nlp_model)
+  
+  print("this is the spacy model:")
+  print(spacy_nlp_model)
+  print("move on")
+  
+  }
+  else {py$spacy_nlp_model <- reticulate::r_to_py("en_core_web_sm") 
+  print("acutally this")
+  }
   
   # Required Parameters
   py$df_docs <- reticulate::r_to_py(data)

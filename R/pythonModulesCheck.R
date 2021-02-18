@@ -6,15 +6,13 @@
 #' @examples
 #' pythonModulesCheck()
 
-
-missingModuleStopper <- function(module_name) {
-  if (!reticulate::py_module_available(module_name)) {
-    stop(paste0("The ", module_name, " Python package is not installed. Install it using cmd: 'pip install ", module_name, "'"))
-  }
-}
-  
- 
 pythonModulesCheck <- function() {
+  
+  missingModuleStopper <- function(module_name) {
+    if (!reticulate::py_module_available(module_name)) {
+      stop(paste0("The ", module_name, " Python package is not installed. Install it using cmd: 'pip install ", module_name, "'"))
+    }
+  }
   
   pythonModuleList <- list(
     "pandas",

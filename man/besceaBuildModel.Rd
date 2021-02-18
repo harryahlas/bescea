@@ -11,13 +11,19 @@ besceaBuildModel(
   modelname = "my_model",
   min_word_count = 1,
   epochs = 25,
-  spacy_nlp_model = "en_core_web_sm"
+  spacy_nlp_model = NULL,
+  ...
 )
 }
 \description{
 Build bescea model
 }
 \examples{
-besceaBuildModel(...)
+besceaBuildModel(data = sneapsters[1:100,], 
+  text_field = "post_text",
+  unique_id = "textid", 
+  min_word_count = 1,
+  epochs = 1, 
+  modelname = "my_model")
 }
 \keyword{text}
