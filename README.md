@@ -1,4 +1,4 @@
-# bescea: Instant text search engine
+# bescea: Instant text search engine <img src="images/bescea-hex.png" align="right" height = 150/>
 
 **Author:** [Harry Ahlas](http://harry.ahlas.com)
 
