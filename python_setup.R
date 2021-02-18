@@ -177,7 +177,7 @@ sample_rows <- sample(1:nrow(data_for_search), 200)
 besceaApp(data = sneapsters, 
           text_field = "post_text",
           unique_id = "textid",
-          modelname = "buildmodelfirst",
+          modelname = "sneaplarge",
           results_count = 30)
 
 
@@ -201,3 +201,33 @@ besceaBuildModel(data = data_for_search[sample_rows,],
                  modelname = "buildmodelfirst", 
                  spacy_nlp_model = "C:\\Users\\hahla\\Desktop\\Toss\\en_core_web_sm\\en_core_web_sm-2.3.1")
 
+
+
+# Run model using alternate spacy -----------------------------------------
+
+
+besceaApp(data = sneapsters, 
+          text_field = "post_text",
+          unique_id = "textid",
+          modelname = "my_model", 
+          searchname = "test_search",
+          spacy_nlp_model = "C:\\Users\\hahla\\Desktop\\Toss\\en_core_web_sm\\en_core_web_sm-2.3.1")
+
+
+besceaLoadData(data = sneapsters, 
+          text_field = "post_text",
+          unique_id = "textid",
+          modelname = "my_model", 
+          searchname = "test_search",
+          spacy_nlp_model = "C:\\Users\\hahla\\Desktop\\Toss\\en_core_web_sm\\en_core_web_sm-2.3.1")
+
+# Build large model -------------------------------------------------------
+
+large_sneap_data <- read.csv( "C:\\Users\\hahla\\Desktop\\github\\polyseis\\data\\sneap_text_long.csv")
+
+besceaBuildModel(data = large_sneap_data, 
+                 text_field = "thread_text",
+                 unique_id = "textid", 
+                 min_word_count = 5,
+                 epochs = 25, 
+                 modelname = "sneaplarge")

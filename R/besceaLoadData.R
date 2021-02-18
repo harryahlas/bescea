@@ -35,6 +35,10 @@ besceaLoadData <- function(data,
   
   library(reticulate)
   
+  # If user supplies a location for spacy then use it, otherwise use "en_core_web_sm"
+  if (exists("spacy_nlp_model")) {py$spacy_nlp_model <- r_to_py(spacy_nlp_model)}
+  else {py$spacy_nlp_model <-  r_to_py("en_core_web_sm") }
+  
   # Required Parameters
   py$df_docs <- reticulate::r_to_py(data)
   py$text_column_name <- reticulate::r_to_py(text_field)

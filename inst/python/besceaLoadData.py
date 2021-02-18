@@ -16,7 +16,7 @@ import time
 df_docs = df_docs.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 df_docs.text = df_docs.text.astype(str) 
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load(spacy_nlp_model)
 text_list = df_docs.text.str.lower().values
 tok_text=[] # for our tokenised corpus
 
