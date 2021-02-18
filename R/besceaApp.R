@@ -1,12 +1,12 @@
 #' Bescea Shiny App
 #'
 #' Instant search engine
-#' @param data the name of df
-#' @param text_field x
-#' @param unique_id x
-#' @param modelname x
-#' @param searchname x
-#' @param results_count x
+#' @param data Data frame, each document is a row/observation.
+#' @param text_field Text field from data
+#' @param unique_id Unique identifier from data
+#' @param modelname Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.
+#' @param searchname Optional name that appears at the top of the Shiny app
+#' @param results_count Number of results to load to the Shiny app. This is also the number of results that will be exported to Excel if the data is downloaded. This number can be changed in the app as well.  You may be able to speed up performance by choosing a lower number.
 #' @keywords text
 #' @export
 #' @examples

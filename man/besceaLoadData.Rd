@@ -14,6 +14,17 @@ besceaLoadData(
   ...
 )
 }
+\arguments{
+\item{data}{Data frame, each document is a row/observation.}
+
+\item{text_field}{Text field from data}
+
+\item{unique_id}{Unique identifier from data}
+
+\item{modelname}{Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.}
+
+\item{searchname}{Optional name that appears at the top of the Shiny app}
+}
 \description{
 Load new data to bescea model for searching
 }
@@ -32,4 +43,6 @@ besceaLoadData(data = sneapsters[1:100,],
   unique_id = "textid",
   modelname = "my_model")
 }
+\keyword{engine}
+\keyword{search}
 \keyword{text}

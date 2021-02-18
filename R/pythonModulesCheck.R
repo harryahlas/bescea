@@ -1,6 +1,6 @@
 #' Python Modules Check
 #'
-#' Check to see if required Python modules are installed and if not, send a message.
+#' Check to see if required Python modules are installed and if not, send an error message.
 #' @keywords reticulate
 #' @export
 #' @examples

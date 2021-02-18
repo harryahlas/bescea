@@ -1,14 +1,14 @@
 #' Build bescea model
 #'
-#' Build bescea model
-#' @param data
-#' @param text_field
-#' @param unique_id
-#' @param modelname
-#' @param min_word_count
-#' @param epochs
-#' @param spacy_nlp_model
-#' @keywords text
+#' Build bescea model from a data frame containing a single text column and unique identifier column.
+#' @param data Data frame, each document is a row/observation.
+#' @param text_field Text field from data
+#' @param unique_id Unique identifier from data
+#' @param modelname Your model name, to be referred to when loading new data. The model will be saved as 3 different files in the 'models' folder.  This value will be the *modelname* arguement when running this model with *besceaLoadData()* or *besceaApp()*. 
+#' @param min_word_count Only consider tokens with at least n occurrences in the corpus
+#' @param epochs Number of FastText epochs. More is generally better but takes longer.
+#' @param spacy_nlp_model Defaults to *NULL*.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide. 
+#' @keywords text search engine
 #' @export
 #' @examples
 #' besceaBuildModel(data = sneapsters[1:100,], 
@@ -17,8 +17,6 @@
 #'   min_word_count = 1,
 #'   epochs = 1, 
 #'   modelname = "my_model")
-
-
 
 besceaBuildModel <- function(data, 
                              text_field,

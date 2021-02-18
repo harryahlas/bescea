@@ -1,12 +1,12 @@
 #' Load new data to bescea model
 #'
 #' Load new data to bescea model for searching
-#' @param data
-#' @param text_field
-#' @param unique_id
-#' @param modelname
-#' @param searchname
-#' @keywords text
+#' @param data Data frame, each document is a row/observation.
+#' @param text_field Text field from data
+#' @param unique_id Unique identifier from data
+#' @param modelname Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.
+#' @param searchname Optional name that appears at the top of the Shiny app
+#' @keywords text search engine
 #' @export
 #' @examples
 #' # Build model called "my_model" first

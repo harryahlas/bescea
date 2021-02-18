@@ -15,17 +15,17 @@ besceaApp(
 )
 }
 \arguments{
-\item{data}{the name of df}
+\item{data}{Data frame, each document is a row/observation.}
 
-\item{text_field}{x}
+\item{text_field}{Text field from data}
 
-\item{unique_id}{x}
+\item{unique_id}{Unique identifier from data}
 
-\item{modelname}{x}
+\item{modelname}{Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.}
 
-\item{searchname}{x}
+\item{searchname}{Optional name that appears at the top of the Shiny app}
 
-\item{results_count}{x}
+\item{results_count}{Number of results to load to the Shiny app. This is also the number of results that will be exported to Excel if the data is downloaded. This number can be changed in the app as well.  You may be able to speed up performance by choosing a lower number.}
 }
 \description{
 Instant search engine

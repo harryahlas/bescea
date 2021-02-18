@@ -15,8 +15,23 @@ besceaBuildModel(
   ...
 )
 }
+\arguments{
+\item{data}{Data frame, each document is a row/observation.}
+
+\item{text_field}{Text field from data}
+
+\item{unique_id}{Unique identifier from data}
+
+\item{modelname}{Your model name, to be referred to when loading new data. The model will be saved as 3 different files in the 'models' folder.  This value will be the \emph{modelname} arguement when running this model with \emph{besceaLoadData()} or \emph{besceaApp()}.}
+
+\item{min_word_count}{Only consider tokens with at least n occurrences in the corpus}
+
+\item{epochs}{Number of FastText epochs. More is generally better but takes longer.}
+
+\item{spacy_nlp_model}{Defaults to \emph{NULL}.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide.}
+}
 \description{
-Build bescea model
+Build bescea model from a data frame containing a single text column and unique identifier column.
 }
 \examples{
 besceaBuildModel(data = sneapsters[1:100,], 
@@ -26,4 +41,6 @@ besceaBuildModel(data = sneapsters[1:100,],
   epochs = 1, 
   modelname = "my_model")
 }
+\keyword{engine}
+\keyword{search}
 \keyword{text}

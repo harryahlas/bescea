@@ -1,6 +1,6 @@
 #' Search Text
 #'
-#' Function to search buscea model
+#' Function to search bescea model
 #' @param search_query search query
 #' @param results_count how many docs to return
 #' @keywords text

@@ -12,7 +12,7 @@ besceaSearch(search_query, results_count = 50)
 \item{results_count}{how many docs to return}
 }
 \description{
-Function to search buscea model
+Function to search bescea model
 }
 \examples{
 besceaSearch("hello")

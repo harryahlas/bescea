@@ -1,5 +1,3 @@
-# ### THIS MAY NOT BE NEEDED
-# 
 # # global reference (will be initialized in .onLoad)
 # pandas <- NULL
 # re <- NULL

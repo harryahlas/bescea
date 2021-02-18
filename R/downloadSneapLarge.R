@@ -1,6 +1,6 @@
 #' Download Sneaplarge Data Set
 #'
-#' Load data from github. Installs into models folder.
+#' (Placeholder function - does not currently work.) Load data from github. Installs into models folder.
 #' @keywords text data sneap
 #' @export
 #' @examples
