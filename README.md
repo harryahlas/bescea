@@ -60,7 +60,7 @@ Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *
 
 ## Acknowledgements
 
-This work is based **heavily** on foundational code provided by Josh Taylor (https://twitter.com/josh_taylor_01). 
+This work is inspired by articles from Josh Taylor (https://twitter.com/josh_taylor_01). 
 
 - https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac
 - https://towardsdatascience.com/how-to-build-a-smart-search-engine-a86fca0d0795
