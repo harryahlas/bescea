@@ -29,7 +29,6 @@ library(reticulate)
 
 
 # Required Parameters
-#py_run_string("csv_file_location = 'data/sneap_sample_text.csv'")
 py_run_string("csv_file_location = 'C:/Users/hahla/Desktop/github/polyseis/data/sneap_text.csv'")
 py_run_string("searchname = 'sample_search4'")
 py_run_string("text_column_name = 'thread_text'")

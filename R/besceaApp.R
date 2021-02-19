@@ -79,7 +79,7 @@ besceaApp <- function(data,
   server <- function(input, output, session) {
     
     # Number of results to show
-    resultsCountInput <- eventReactive(input$resultsCountButton,{
+    resultsCountInput <- shiny::eventReactive(input$resultsCountButton,{
       
       input$resultsCountButton
       
