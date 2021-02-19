@@ -6,6 +6,8 @@
 #' @param unique_id Unique identifier from data
 #' @param modelname Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.
 #' @param searchname Optional name that appears at the top of the Shiny app
+#' @param spacy_nlp_model Defaults to *NULL*.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide. 
+#' @param ... Arguments passed from other functions
 #' @keywords text search engine
 #' @export
 #' @examples
@@ -72,8 +74,8 @@ besceaLoadData <- function(data,
   py$modelname <- reticulate::r_to_py(modelname)
   py$searchname <- reticulate::r_to_py(searchname)
   
-  reticulate::source_python(paste0(system.file(package = packageName()), "/python/besceaLoadData.py"))
-  reticulate::source_python(paste0(system.file(package = packageName()), "/python/besceaSearch.py"))
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaLoadData.py"))
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaSearch.py"))
 
 }
 

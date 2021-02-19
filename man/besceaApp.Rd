@@ -26,6 +26,8 @@ besceaApp(
 \item{searchname}{Optional name that appears at the top of the Shiny app}
 
 \item{results_count}{Number of results to load to the Shiny app. This is also the number of results that will be exported to Excel if the data is downloaded. This number can be changed in the app as well.  You may be able to speed up performance by choosing a lower number.}
+
+\item{...}{Arguments passed from other functions}
 }
 \description{
 Instant search engine
@@ -34,8 +36,6 @@ Instant search engine
 besceaApp(data = sneapsters[1:100,], 
           text_field = "post_text",
           unique_id = "textid",
-          epochs = 1,
-          min_word_count = 1,
           searchname = "test_search")
 }
 \keyword{text}

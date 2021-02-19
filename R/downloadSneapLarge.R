@@ -8,13 +8,13 @@
 
 
 downloadSneaplarge <- function() {
-  download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model",
-                destfile = "models/_fasttext_sneaplarge_.model")
+  utils::download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model",
+                       destfile = "models/_fasttext_sneaplarge_.model")
   
-  download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model.trainables.vectors_ngrams_lockf.npy",
-                destfile = "models/_fasttext_sneaplarge_.model.trainables.vectors_ngrams_lockf.npy")
+  utils::download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model.trainables.vectors_ngrams_lockf.npy",
+                       destfile = "models/_fasttext_sneaplarge_.model.trainables.vectors_ngrams_lockf.npy")
   
-  download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model.wv.vectors_ngrams.npy",
-                destfile = "models/_fasttext_sneaplarge_.model.wv.vectors_ngrams.npy")
+  utils::download.file(url = "https://raw.githubusercontent.com/harryahlas/bescea/main/models/_fasttext_sneaplarge_.model.wv.vectors_ngrams.npy",
+                       destfile = "models/_fasttext_sneaplarge_.model.wv.vectors_ngrams.npy")
   
 }

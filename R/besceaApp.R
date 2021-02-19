@@ -7,14 +7,13 @@
 #' @param modelname Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.
 #' @param searchname Optional name that appears at the top of the Shiny app
 #' @param results_count Number of results to load to the Shiny app. This is also the number of results that will be exported to Excel if the data is downloaded. This number can be changed in the app as well.  You may be able to speed up performance by choosing a lower number.
+#' @param ... Arguments passed from other functions
 #' @keywords text
 #' @export
 #' @examples
 #' besceaApp(data = sneapsters[1:100,], 
 #'           text_field = "post_text",
 #'           unique_id = "textid",
-#'           epochs = 1,
-#'           min_word_count = 1,
 #'           searchname = "test_search")
 
 besceaApp <- function(data,
@@ -49,32 +48,32 @@ besceaApp <- function(data,
   library(writexl)
   
   if(!is.null(results_count)) {
-    py$return_results_count <- r_to_py(as.integer(results_count))
+    py$return_results_count <- reticulate::r_to_py(as.integer(results_count))
   }
   
 
-  ui <- shinyUI(fluidPage(
+  ui <- shiny::shinyUI(shiny::fluidPage(
     
     # Application title
-    titlePanel(paste(searchname, "Search")),
+    shiny::titlePanel(paste(searchname, "Search")),
     
-    sidebarLayout(
+    shiny::sidebarLayout(
       
       # Side panel
-      sidebarPanel(textInput("query", label = h4("Query"), value = ""),
-                   textInput("resultsCountButton", 
-                             label = "# Results", 
-                             width = '75px',
-                             value = results_count),
-                   actionButton("resultsButton", "Show Results"),
-                   HTML("<br><br>"),
-                   downloadButton("dl", "Download to Excel"),
-                   width = 3),
+      shiny::sidebarPanel(shiny::textInput("query", label = shiny::h4("Query"), value = ""),
+                          shiny::textInput("resultsCountButton", 
+                                           label = "# Results", 
+                                           width = '75px',
+                                           value = results_count),
+                          shiny::actionButton("resultsButton", "Show Results"),
+                          shiny::HTML("<br><br>"),
+                          shiny::downloadButton("dl", "Download to Excel"),
+                          width = 3),
       
       # Main Panel
-      mainPanel(h4("Documents"),
-                DT::dataTableOutput("resultsTable"),
-                width = 9)
+      shiny::mainPanel(shiny::h4("Documents"),
+                       DT::dataTableOutput("resultsTable"),
+                       width = 9)
     )))
   
   server <- function(input, output, session) {
@@ -87,7 +86,7 @@ besceaApp <- function(data,
     })
     
     
-    queryInput <- eventReactive(input$resultsButton,{
+    queryInput <- shiny::eventReactive(input$resultsButton,{
       
       documents_retrieved <- data.frame(besceaSearch(input$query, as.integer(resultsCountInput())))
       documents_retrieved$score <- round(documents_retrieved$score,3)
@@ -104,17 +103,17 @@ besceaApp <- function(data,
     )
     
     # Print to excel file
-    output$dl <- downloadHandler(
+    output$dl <- shiny::downloadHandler(
       filename = function() { "ae.xlsx"},
-      content = function(file) {write_xlsx(queryInput(), path = file)}
+      content = function(file) {writexl::write_xlsx(queryInput(), path = file)}
     )
     
     session$onSessionEnded(function() {
-      stopApp()
+      shiny::stopApp()
     })
   }
   
-  shinyApp(ui, server, options = list(launch.browser = TRUE))  
+  shiny::shinyApp(ui, server, options = list(launch.browser = TRUE))  
   
 }
 

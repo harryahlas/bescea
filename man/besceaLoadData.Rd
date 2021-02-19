@@ -24,6 +24,10 @@ besceaLoadData(
 \item{modelname}{Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.}
 
 \item{searchname}{Optional name that appears at the top of the Shiny app}
+
+\item{spacy_nlp_model}{Defaults to \emph{NULL}.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide.}
+
+\item{...}{Arguments passed from other functions}
 }
 \description{
 Load new data to bescea model for searching

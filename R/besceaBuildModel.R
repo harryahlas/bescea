@@ -8,6 +8,7 @@
 #' @param min_word_count Only consider tokens with at least n occurrences in the corpus
 #' @param epochs Number of FastText epochs. More is generally better but takes longer.
 #' @param spacy_nlp_model Defaults to *NULL*.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide. 
+#' @param ... Arguments passed from other functions
 #' @keywords text search engine
 #' @export
 #' @examples
@@ -32,7 +33,7 @@ besceaBuildModel <- function(data,
   # If SpaCy model is already loaded, juse it.
   # If user supplies a location for SpaCy then use it, 
   # otherwise use "en_core_web_sm"
-  if (py_eval("'spacy_nlp_model' in locals() or 'spacy_nlp_model' in globals()")) {
+  if (reticulate::py_eval("'spacy_nlp_model' in locals() or 'spacy_nlp_model' in globals()")) {
     print("e1")
     NULL
   } else if (!is.null(spacy_nlp_model)) {
@@ -58,6 +59,6 @@ besceaBuildModel <- function(data,
   
   print("building model")
   
-  reticulate::source_python(paste0(system.file(package = packageName()), "/python/besceaBuildModel.py"))
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
   
 }

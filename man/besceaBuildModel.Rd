@@ -29,6 +29,8 @@ besceaBuildModel(
 \item{epochs}{Number of FastText epochs. More is generally better but takes longer.}
 
 \item{spacy_nlp_model}{Defaults to \emph{NULL}.  When Python is run, SpaCy will load "en_core_web_sm" unless this argument is present. In that case, SpaCy will look for an nlp model in the location you provide.}
+
+\item{...}{Arguments passed from other functions}
 }
 \description{
 Build bescea model from a data frame containing a single text column and unique identifier column.
