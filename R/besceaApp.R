@@ -22,7 +22,9 @@ besceaApp <- function(data,
                       modelname = NULL,
                       searchname = "Bescea",
                       results_count = 50, ...) {
-
+  
+  dir.create("models")
+  
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {
     besceaLoadData(data = data, 
@@ -42,10 +44,10 @@ besceaApp <- function(data,
   # This shouldn't occur
   else {stop("Error of otherworldly origin")}
   
-  library(shiny)
+  # library(shiny)
   library(reticulate)
-  library(DT)
-  library(writexl)
+  # library(DT)
+  # library(writexl)
   
   if(!is.null(results_count)) {
     py$return_results_count <- reticulate::r_to_py(as.integer(results_count))

@@ -35,6 +35,8 @@ besceaLoadData <- function(data,
   
   pythonModulesCheck() # Check python modules
   
+  dir.create("models")
+
   if (!exists("text_field")) { stop("you need to provide a text_field argument")}
   if (!exists("unique_id")) { stop("you need to provide a unique_id argument")}
   

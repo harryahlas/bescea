@@ -14,7 +14,6 @@ import time
 
 # # Variables specified in R
 # searchname = "sample_search"
-# csv_file_location = "data/sneap_sample_text.csv"
 # return_results_count = 10
 
 # Create models directory

@@ -28,6 +28,7 @@ besceaBuildModel <- function(data,
                              spacy_nlp_model = NULL,
                              ...
                              ) {
+  dir.create("models")
   library(reticulate)
   
   # If SpaCy model is already loaded, juse it.
@@ -44,8 +45,6 @@ besceaBuildModel <- function(data,
   print(spacy_nlp_model)
   
   pythonModulesCheck() # Check python modules
-  
-  library(reticulate)
   
   # Required Parameters
   py$df <- reticulate::r_to_py(data)

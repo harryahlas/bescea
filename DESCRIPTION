@@ -6,8 +6,8 @@ Authors@R:
            family = "Ahlas",
            role = c("aut", "cre"),
            email = "hahlas@hotmail.com")
-Description: Quickly build a Shiny search engine using FastText and SpaCy. Ideal for use on short comments. Can build a model using your own data or load a pretrained model. Based heavily on the work of Josh Taylor (https://twitter.com/josh_taylor_01, https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac)
-License: MIT + file LICENSE.md
+Description: Quickly build a Shiny search engine using FastText and SpaCy. Ideal for use on short comments. Can build a model using your own data or load a pretrained model. Based heavily on the work of Josh Taylor (https://twitter.com/josh_taylor_01, https://towardsdatascience.com/how-to-build-a-search-engine-9f8ffa405eac).
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

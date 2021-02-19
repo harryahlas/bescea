@@ -14,7 +14,6 @@ import time
 
 # # Variables specified in R
 # searchname = "sample_search"
-# csv_file_location = "data/sneap_sample_text.csv"
 # return_results_count = 10
 
 # Create models directory
@@ -22,7 +21,6 @@ if not os.path.exists('models'):
     os.makedirs('models')
 
 # Import data and rename column, ensure it is text
-#df = pd.read_csv(csv_file_location, encoding = 'iso-8859-1')
 df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 df.text = df.text.astype(str) 
 
