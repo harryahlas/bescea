@@ -6,6 +6,9 @@ import numpy as np
 #df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
 #df.text = df.text.astype(str) 
 
+return_results_count = 10
+
+
 df = pd.DataFrame({
   'textid': ['a', 'b', 'c', 'd'], 
   'post_text': [
@@ -31,7 +34,8 @@ scores = bm25_obj.get_scores(query_doc)
 df['bmf_scores'] = scores
 dfout = df.sort_values(by=['scores'], ascending = False) 
 dfout['bm25_rank'] = np.arange(len(dfout))
-dfout
+dfout[dfout['bm25_rank'] <= return_results_count]
+
 
 
 # old
