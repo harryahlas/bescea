@@ -29,7 +29,7 @@ The code above first tokenizes your text using [SpaCy](https://spacy.io/), then 
 
 Longer queries tend to be more successful than short queries.  If a query like "data science" isn't working, try adding supplemental words to your query, such as "data science statistics code analytics".
 
-![](images/search2.png)
+![](man/images/search2.png)
 
 ## Build Model
 
@@ -56,7 +56,7 @@ besceaApp(data = sneapsters,
 
 ## Requirements
 
-Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). 
+Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). Also requires that SpaCy's en_core_web_sm model be installed.
 
 ## Acknowledgements
 
