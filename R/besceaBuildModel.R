@@ -58,7 +58,6 @@ besceaBuildModel <- function(data,
   
   print("building model")
   
-  # reticulate::source_python("C:\\Users\\hahla\\Documents\\R\\win-library\\4.0\\bescea\\python\\besceaBuildModel.py")
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
   
 }

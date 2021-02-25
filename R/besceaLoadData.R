@@ -76,10 +76,6 @@ besceaLoadData <- function(data,
   py$modelname <- reticulate::r_to_py(modelname)
   py$searchname <- reticulate::r_to_py(searchname)
   
-  
-  # reticulate::source_python("C:\\Users\\hahla\\Documents\\R\\win-library\\4.0\\bescea\\python\\besceaLoadData.py")
-  # reticulate::source_python("C:\\Users\\hahla\\Documents\\R\\win-library\\4.0\\bescea\\python\\besceaSearch.py")
-  
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaLoadData.py"))
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaSearch.py"))
 

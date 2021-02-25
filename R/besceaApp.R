@@ -70,10 +70,6 @@ besceaApp <- function(data,
                           shiny::actionButton("resultsButton", "Show Results"),
                           shiny::HTML("<br><br>"),
                           shiny::downloadButton("dl", "Download to Excel"),
-                          # shiny::textInput("fastTextStrengthInput", 
-                          #                  label = "FastText Strength", 
-                          #                  width = '75px',
-                          #                  value = .5)
                           shiny::sliderInput("fastTextStrengthInput", 
                                            label = "FastText Strength", 
                                            #width = '75px',
@@ -122,7 +118,7 @@ besceaApp <- function(data,
     
     # Print to excel file
     output$dl <- shiny::downloadHandler(
-      filename = function() { "ae.xlsx"},
+      filename = function() { "search_export.xlsx"},
       content = function(file) {writexl::write_xlsx(queryInput(), path = file)}
     )
     
