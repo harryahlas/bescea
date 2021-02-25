@@ -58,13 +58,13 @@ besceaLoadData <- function(data,
   # If user supplies a location for spacy then use it, otherwise use "en_core_web_sm"
   if (!is.null(spacy_nlp_model)) {py$spacy_nlp_model <- reticulate::r_to_py(spacy_nlp_model)
   
-  print("this is the spacy model:")
+  print("Custom spacy model:")
   print(spacy_nlp_model)
-  print("move on")
+  print("loading...")
   
   }
   else {py$spacy_nlp_model <- reticulate::r_to_py("en_core_web_sm") 
-  print("acutally this")
+  print("Loading en_core_web_sm...")
   }
   
   # Required Parameters
@@ -75,6 +75,10 @@ besceaLoadData <- function(data,
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
   py$searchname <- reticulate::r_to_py(searchname)
+  
+  
+  # reticulate::source_python("C:\\Users\\hahla\\Documents\\R\\win-library\\4.0\\bescea\\python\\besceaLoadData.py")
+  # reticulate::source_python("C:\\Users\\hahla\\Documents\\R\\win-library\\4.0\\bescea\\python\\besceaSearch.py")
   
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaLoadData.py"))
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaSearch.py"))

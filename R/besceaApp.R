@@ -70,7 +70,18 @@ besceaApp <- function(data,
                           shiny::actionButton("resultsButton", "Show Results"),
                           shiny::HTML("<br><br>"),
                           shiny::downloadButton("dl", "Download to Excel"),
-                          width = 3),
+                          # shiny::textInput("fastTextStrengthInput", 
+                          #                  label = "FastText Strength", 
+                          #                  width = '75px',
+                          #                  value = .5)
+                          shiny::sliderInput("fastTextStrengthInput", 
+                                           label = "FastText Strength", 
+                                           #width = '75px',
+                                           value = .5,
+                                           min = 0,
+                                           max = 1),
+                          width = 3
+      ),
       
       # Main Panel
       shiny::mainPanel(shiny::h4("Documents"),
@@ -87,10 +98,15 @@ besceaApp <- function(data,
       
     })
     
+    fastTextStrength <- shiny::eventReactive(input$fastTextStrengthInput,{
+      
+      input$fastTextStrengthInput
+      
+    })
     
     queryInput <- shiny::eventReactive(input$resultsButton,{
       
-      documents_retrieved <- data.frame(besceaSearch(input$query, as.integer(resultsCountInput())))
+      documents_retrieved <- data.frame(besceaSearch(input$query, as.integer(resultsCountInput()), fastTextStrength()))
       documents_retrieved$score <- round(documents_retrieved$score,3)
       documents_retrieved
       

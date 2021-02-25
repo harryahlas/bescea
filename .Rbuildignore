@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 more_test_scripts.R
 useful_test_scripts.R
+data/sneap.csv

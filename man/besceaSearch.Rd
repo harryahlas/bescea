@@ -4,7 +4,7 @@
 \alias{besceaSearch}
 \title{Search Text}
 \usage{
-besceaSearch(search_query, results_count = 50)
+besceaSearch(search_query, results_count = 50, fasttext_weight = 0.5)
 }
 \arguments{
 \item{search_query}{search query}
