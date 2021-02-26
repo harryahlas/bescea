@@ -63,19 +63,22 @@ besceaApp <- function(data,
       
       # Side panel
       shiny::sidebarPanel(shiny::textInput("query", label = shiny::h4("Query"), value = ""),
+                          shiny::actionButton("resultsButton", "Show Results"),
+                          shiny::HTML("<br> <br>"),
+                          shiny::downloadButton("dl", "Download to Excel"),
+                          shiny::HTML("<br><br>"),
                           shiny::textInput("resultsCountButton", 
                                            label = "# Results", 
                                            width = '75px',
                                            value = results_count),
-                          shiny::actionButton("resultsButton", "Show Results"),
                           shiny::HTML("<br><br>"),
-                          shiny::downloadButton("dl", "Download to Excel"),
                           shiny::sliderInput("fastTextStrengthInput", 
-                                           label = "FastText Strength", 
+                                           label = "Smart Search << - >> Exact Match", 
                                            #width = '75px',
                                            value = .5,
                                            min = 0,
-                                           max = 1),
+                                           max = 1, 
+                                           ticks = FALSE),
                           width = 3
       ),
       
@@ -113,7 +116,7 @@ besceaApp <- function(data,
         filter = "top",
         rownames= FALSE,
         # Dropdown for how many rows to display
-        options = list(pageLength = 7, info = FALSE, lengthMenu = list(c(25, 20, 15, 10, 5, -1), c("25", "20", "15", "10", "5", "All"))) #)
+        options = list(pageLength = 5, info = FALSE, lengthMenu = list(c(100, 50, 25, 5, -1), c("100", "50", "25", "5", "All"))) #)
     )
     
     # Print to excel file
