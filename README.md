@@ -25,7 +25,9 @@ besceaApp(data = sneapsters,         # Data frame, each document is a row/observ
 
 ## Shiny App
 
-The code above first tokenizes your text using [SpaCy](https://spacy.io/), then generates a [fastText](https://fasttext.cc/) model. It uses [BM25Okapi](https://github.com/dorianbrown/rank_bm25) as a searching tool.  Finally, it generates a [Shiny](https://shiny.rstudio.com/) app in your browser to search your text.  You can download an .xlsx file of your results by clicking the *Download* button.
+The code above first tokenizes your text using [SpaCy](https://spacy.io/), then builds [FastText](https://fasttext.cc/) and [Whoosh](https://whoosh.readthedocs.io/en/latest/intro.html) models.  Finally, it generates a [Shiny](https://shiny.rstudio.com/) app in your browser to search your text.  You can download an .xlsx file of your results by clicking the *Download* button.
+
+Move the *Smart Search - Exact Match* slider to fine tune between FastText smart searching and Whoosh exact matching.  This can dial in your results more precisely depending on whether you are looking for general ideas or exact words.
 
 Longer queries tend to be more successful than short queries.  If a query like "data science" isn't working, try adding supplemental words to your query, such as "data science statistics code analytics".
 
