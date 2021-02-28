@@ -28,9 +28,12 @@ besceaBuildModel <- function(data,
                              spacy_nlp_model = NULL,
                              ...
                              ) {
-  
-  text_field_for_py <- text_field # Used to identify text column name for python
-  unique_id_for_py <- unique_id # Used to identify text column name for python
+
+  text_field <- rlang::enquo(text_field)
+  unique_id <- rlang::enquo(unique_id)
+
+  text_field_for_py <- gsub("~|\"", "",deparse(substitute(text_field))) # Used to identify text column name for python
+  unique_id_for_py <- gsub("~|\"", "",deparse(substitute(unique_id))) # Used to identify text column name for python
   
   dir.create("models")
   library(reticulate)
@@ -52,9 +55,10 @@ besceaBuildModel <- function(data,
   pythonModulesCheck() # Check python modules
   
   # Required Parameters
+  # Though gsub has already been used once above, we need it here again for when besceaBuildModel() is run standalone.
   py$df <- reticulate::r_to_py(data)
-  py$text_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(text_field_for_py)))))
-  py$id_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(unique_id_for_py)))))
+  py$text_column_name <- reticulate::r_to_py(gsub("~|\"", "",(deparse(substitute(text_field_for_py))))) 
+  py$id_column_name <- reticulate::r_to_py(gsub("~|\"", "",(deparse(substitute(unique_id_for_py)))))
 
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
@@ -62,7 +66,6 @@ besceaBuildModel <- function(data,
   py$fasttext_epochs <- reticulate::r_to_py(as.integer(epochs))
   
   print("Building model...")
-  # reticulate::source_python("inst/python/besceaBuildModel.py")
   reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
   
 }

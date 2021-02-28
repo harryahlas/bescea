@@ -18,9 +18,9 @@ besceaBuildModel(
 \arguments{
 \item{data}{Data frame, each document is a row/observation.}
 
-\item{text_field}{Text field from data}
+\item{text_field}{Text field from data, unquoted}
 
-\item{unique_id}{Unique identifier from data}
+\item{unique_id}{Unique identifier from data, unquoted}
 
 \item{modelname}{Your model name, to be referred to when loading new data. The model will be saved as 3 different files in the 'models' folder.  This value will be the \emph{modelname} arguement when running this model with \emph{besceaLoadData()} or \emph{besceaApp()}.}
 
@@ -37,8 +37,8 @@ Build bescea model from a data frame containing a single text column and unique 
 }
 \examples{
 besceaBuildModel(data = sneapsters[1:100,], 
-  text_field = "post_text",
-  unique_id = "textid", 
+  text_field = post_text,
+  unique_id = textid, 
   min_word_count = 1,
   epochs = 1, 
   modelname = "my_model")

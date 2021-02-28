@@ -17,9 +17,9 @@ besceaApp(
 \arguments{
 \item{data}{Data frame, each document is a row/observation.}
 
-\item{text_field}{Text field from data}
+\item{text_field}{Text field from data, unquoted}
 
-\item{unique_id}{Unique identifier from data}
+\item{unique_id}{Unique identifier from data, unquoted}
 
 \item{modelname}{Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.}
 
@@ -34,8 +34,8 @@ Instant search engine
 }
 \examples{
 besceaApp(data = sneapsters[1:100,], 
-          text_field = "post_text",
-          unique_id = "textid",
+          text_field = post_text,
+          unique_id = textid,
           searchname = "test_search")
 }
 \keyword{text}

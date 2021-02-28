@@ -31,9 +31,10 @@ besceaApp <- function(data,
   print(paste("#rows before filter:", nrow(data)))
   
   # Filter out rows with no characters
+  rows_before_filter <- nrow(data)
   data <- dplyr::filter(data, stringr::str_detect(!!text_field, "[:alpha:]")) 
-
-  print(paste("#rows after filter:", nrow(data)))
+  rows_after_filter <- nrow(data)
+  print(paste("Removed", rows_before_filter - rows_after_filter, "documents from search because they contain no [:alpha:] characters"))
   
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {
