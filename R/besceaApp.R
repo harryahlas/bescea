@@ -27,27 +27,31 @@ besceaApp <- function(data,
 
   text_field <- rlang::enquo(text_field)
   unique_id <- rlang::enquo(unique_id)
-  
-  print(paste("#rows before filter:", nrow(data)))
+ 
+  text_field_for_py <- gsub("~|\"", "",deparse(substitute(text_field))) # Used to identify text column name for python
+  unique_id_for_py <- gsub("~|\"", "",deparse(substitute(unique_id))) # Used to identify text column name for python
   
   # Filter out rows with no characters
   rows_before_filter <- nrow(data)
   data <- dplyr::filter(data, stringr::str_detect(!!text_field, "[:alpha:]")) 
   rows_after_filter <- nrow(data)
-  print(paste("Removed", rows_before_filter - rows_after_filter, "documents from search because they contain no [:alpha:] characters"))
+  rows_removed <- rows_before_filter - rows_after_filter
+  if (rows_removed > 0) {
+    print(paste("Removed", rows_removed, "documents from search because they contain no [:alpha:] characters"))
+  }
   
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {
     besceaLoadData(data = data, 
-                   text_field = text_field,
-                   unique_id = unique_id, ...)
+                   text_field = !!text_field,
+                   unique_id = !!unique_id, ...)
   } 
   
   # Else if you want to load an old model then do so and then load your new data
   else if(!is.null(modelname)) {
     besceaLoadData(data = data, 
-                   text_field = text_field,
-                   unique_id = unique_id,
+                   text_field = !!text_field_for_py,
+                   unique_id = !!unique_id,
                    modelname = modelname,
                    searchname = searchname, ...)
   } 
@@ -127,7 +131,7 @@ besceaApp <- function(data,
     
     # Print to excel file
     output$dl <- shiny::downloadHandler(
-      filename = function() { "search_export.xlsx"},
+      filename = function() { paste0(searchname, "_export.xlsx")},
       content = function(file) {writexl::write_xlsx(queryInput(), path = file)}
     )
     

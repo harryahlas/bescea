@@ -32,11 +32,11 @@ besceaLoadData <- function(data,
                            searchname = "my_search", 
                            spacy_nlp_model = NULL, ...) {
 
-  text_field_for_py <- text_field # Used to identify text column name for python
-  unique_id_for_py <- unique_id # Used to identify text column name for python
-  
   text_field <- rlang::enquo(text_field)
   unique_id <- rlang::enquo(unique_id)
+  
+  text_field_for_py <- gsub("~|\"", "",deparse(substitute(text_field))) # Used to identify text column name for python
+  unique_id_for_py <- gsub("~|\"", "",deparse(substitute(unique_id))) # Used to identify text column name for python
   
   print("Checking Python modules...")
 
@@ -54,8 +54,8 @@ besceaLoadData <- function(data,
   if(is.null(modelname)) {
     modelname <- "my_model" 
     besceaBuildModel(data, 
-                     text_field = text_field,
-                     unique_id = unique_id,
+                     text_field = !!text_field,
+                     unique_id = !!unique_id,
                      spacy_nlp_model = spacy_nlp_model,
                      ...)
   }
@@ -74,10 +74,11 @@ besceaLoadData <- function(data,
   }
   
   # Required Parameters
+  # Though gsub has already been used once above, we need it here again for when besceaBuildModel() is run standalone.
   py$df_docs <- reticulate::r_to_py(data)
-  py$text_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(text_field_for_py)))))
-  py$id_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(unique_id_for_py)))))
-
+  py$text_column_name <- reticulate::r_to_py(gsub("~|\"", "",(deparse(substitute(text_field_for_py))))) 
+  py$id_column_name <- reticulate::r_to_py(gsub("~|\"", "",(deparse(substitute(unique_id_for_py)))))
+  
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
   py$searchname <- reticulate::r_to_py(searchname)

@@ -21,11 +21,11 @@ if not os.path.exists('models'):
     os.makedirs('models')
 
 # Import data and rename column, ensure it is text
-df = df.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
-df.text = df.text.astype(str) 
+df_docs = df_docs.rename(columns={f'{text_column_name}': 'text', f'{id_column_name}': 'id'})
+df_docs.text = df_docs.text.astype(str) 
 
 nlp = spacy.load(spacy_nlp_model) # defaults to "en_core_web_sm"
-text_list = df.text.str.lower().values
+text_list = df_docs.text.str.lower().values
 tok_text=[] # for our tokenised corpus
 
 # Tokenising using SpaCy:
