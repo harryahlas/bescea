@@ -25,12 +25,15 @@ besceaApp <- function(data,
   
   dir.create("models")
 
-  text_field <- enquo(text_field)
-  unique_id <- enquo(unique_id)
+  text_field <- rlang::enquo(text_field)
+  unique_id <- rlang::enquo(unique_id)
   
-  ###############################################
+  print(paste("#rows before filter:", nrow(data)))
+  
   # Filter out rows with no characters
-  #data <- data[stringr::str_detect(data$text_field, "[:alpha:]"),]
+  data <- dplyr::filter(data, stringr::str_detect(!!text_field, "[:alpha:]")) 
+
+  print(paste("#rows after filter:", nrow(data)))
   
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {

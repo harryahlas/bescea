@@ -35,8 +35,8 @@ besceaLoadData <- function(data,
   text_field_for_py <- text_field # Used to identify text column name for python
   unique_id_for_py <- unique_id # Used to identify text column name for python
   
-  text_field <- enquo(text_field)
-  unique_id <- enquo(unique_id)
+  text_field <- rlang::enquo(text_field)
+  unique_id <- rlang::enquo(unique_id)
   
   print("Checking Python modules...")
 
