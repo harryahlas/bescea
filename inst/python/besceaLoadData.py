@@ -96,8 +96,20 @@ def index_search(dirname, search_fields, search_query, return_results_count):
     with ix.searcher() as s:
         results = s.search(q, terms=True, limit = return_results_count)
         print("Completing Whoosh Search")
-        tmp_df = pd.concat([pd.DataFrame([[hit['path']]], columns=['path']) for hit in results], ignore_index=True)
-        return(tmp_df)
+        if len(results) == 0:
+            tmp_df = pd.DataFrame(columns=['path'])
+        else:
+            #[print(hit) for hit in results]
+            tmp_df = pd.concat([pd.DataFrame([[hit['path']]], columns=['path']) for hit in results], ignore_index=True)
+    return(tmp_df)
+      
+
+
+
+
+
 
 print("Models loaded, vectors created for data and is ready for searching.")
   
+
+search_query="sudsdsdf"

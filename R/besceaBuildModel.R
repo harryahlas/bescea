@@ -2,8 +2,8 @@
 #'
 #' Build bescea model from a data frame containing a single text column and unique identifier column.
 #' @param data Data frame, each document is a row/observation.
-#' @param text_field Text field from data
-#' @param unique_id Unique identifier from data
+#' @param text_field Text field from data, unquoted
+#' @param unique_id Unique identifier from data, unquoted
 #' @param modelname Your model name, to be referred to when loading new data. The model will be saved as 3 different files in the 'models' folder.  This value will be the *modelname* arguement when running this model with *besceaLoadData()* or *besceaApp()*. 
 #' @param min_word_count Only consider tokens with at least n occurrences in the corpus
 #' @param epochs Number of FastText epochs. More is generally better but takes longer.
@@ -13,8 +13,8 @@
 #' @export
 #' @examples
 #' besceaBuildModel(data = sneapsters[1:100,], 
-#'   text_field = "post_text",
-#'   unique_id = "textid", 
+#'   text_field = post_text,
+#'   unique_id = textid, 
 #'   min_word_count = 1,
 #'   epochs = 1, 
 #'   modelname = "my_model")
@@ -28,6 +28,10 @@ besceaBuildModel <- function(data,
                              spacy_nlp_model = NULL,
                              ...
                              ) {
+  
+  text_field_for_py <- text_field # Used to identify text column name for python
+  unique_id_for_py <- unique_id # Used to identify text column name for python
+  
   dir.create("models")
   library(reticulate)
   
@@ -35,29 +39,31 @@ besceaBuildModel <- function(data,
   # If user supplies a location for SpaCy then use it, 
   # otherwise use "en_core_web_sm"
   if (reticulate::py_eval("'spacy_nlp_model' in locals() or 'spacy_nlp_model' in globals()")) {
-    print("e1")
+    print("SpaCy model already loaded")
     NULL
   } else if (!is.null(spacy_nlp_model)) {
-    print("e2")
+    print("Loading SpaCy from custom location...")
     py$spacy_nlp_model <- reticulate::r_to_py(spacy_nlp_model)
   } else {py$spacy_nlp_model <-  reticulate::r_to_py("en_core_web_sm") }
-  print("e3")
+  print("Loading Spacy model...")
   print(spacy_nlp_model)
   
+  print("Checking Python modules...")
   pythonModulesCheck() # Check python modules
   
   # Required Parameters
   py$df <- reticulate::r_to_py(data)
-  py$text_column_name <- reticulate::r_to_py(text_field)
-  py$id_column_name <- reticulate::r_to_py(unique_id)
+  py$text_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(text_field_for_py)))))
+  py$id_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(unique_id_for_py)))))
+  #py$id_column_name <- reticulate::r_to_py(unique_id)
   
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
   py$min_fasttext_word_count <- reticulate::r_to_py(as.integer(min_word_count))
   py$fasttext_epochs <- reticulate::r_to_py(as.integer(epochs))
   
-  print("building model")
-  
-  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
+  print("Building model...")
+  reticulate::source_python("inst/python/besceaBuildModel.py")
+  #reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
   
 }

@@ -2,8 +2,8 @@
 #'
 #' Instant search engine
 #' @param data Data frame, each document is a row/observation.
-#' @param text_field Text field from data
-#' @param unique_id Unique identifier from data
+#' @param text_field Text field from data, unquoted
+#' @param unique_id Unique identifier from data, unquoted
 #' @param modelname Defaults to NULL. If you are loading data to a FastText model built using besceaBuildModel, put the name of model here.  The model should be saved as 3 different files in the 'models' folder.
 #' @param searchname Optional name that appears at the top of the Shiny app
 #' @param results_count Number of results to load to the Shiny app. This is also the number of results that will be exported to Excel if the data is downloaded. This number can be changed in the app as well.  You may be able to speed up performance by choosing a lower number.
@@ -12,8 +12,8 @@
 #' @export
 #' @examples
 #' besceaApp(data = sneapsters[1:100,], 
-#'           text_field = "post_text",
-#'           unique_id = "textid",
+#'           text_field = post_text,
+#'           unique_id = textid,
 #'           searchname = "test_search")
 
 besceaApp <- function(data,
@@ -24,6 +24,13 @@ besceaApp <- function(data,
                       results_count = 50, ...) {
   
   dir.create("models")
+
+  text_field <- enquo(text_field)
+  unique_id <- enquo(unique_id)
+  
+  ###############################################
+  # Filter out rows with no characters
+  #data <- data[stringr::str_detect(data$text_field, "[:alpha:]"),]
   
   # If you are running this on its own without a prior model, then use besceaLoadData to build a model and then load data
   if(is.null(modelname)) {
@@ -44,15 +51,11 @@ besceaApp <- function(data,
   # This shouldn't occur
   else {stop("Error of otherworldly origin")}
   
-  # library(shiny)
   library(reticulate)
-  # library(DT)
-  # library(writexl)
   
   if(!is.null(results_count)) {
     py$return_results_count <- reticulate::r_to_py(as.integer(results_count))
   }
-  
 
   ui <- shiny::shinyUI(shiny::fluidPage(
     
@@ -74,7 +77,6 @@ besceaApp <- function(data,
                           shiny::HTML("<br><br>"),
                           shiny::sliderInput("fastTextStrengthInput", 
                                            label = "Smart Search << - >> Exact Match", 
-                                           #width = '75px',
                                            value = .5,
                                            min = 0,
                                            max = 1, 
