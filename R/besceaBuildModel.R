@@ -55,15 +55,14 @@ besceaBuildModel <- function(data,
   py$df <- reticulate::r_to_py(data)
   py$text_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(text_field_for_py)))))
   py$id_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(unique_id_for_py)))))
-  #py$id_column_name <- reticulate::r_to_py(unique_id)
-  
+
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
   py$min_fasttext_word_count <- reticulate::r_to_py(as.integer(min_word_count))
   py$fasttext_epochs <- reticulate::r_to_py(as.integer(epochs))
   
   print("Building model...")
-  reticulate::source_python("inst/python/besceaBuildModel.py")
-  #reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
+  # reticulate::source_python("inst/python/besceaBuildModel.py")
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaBuildModel.py"))
   
 }

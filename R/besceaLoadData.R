@@ -77,21 +77,20 @@ besceaLoadData <- function(data,
   py$df_docs <- reticulate::r_to_py(data)
   py$text_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(text_field_for_py)))))
   py$id_column_name <- reticulate::r_to_py(gsub("~", "",(deparse(substitute(unique_id_for_py)))))
-  #py$id_column_name <- reticulate::r_to_py(unique_id)
-  
+
   # Optional Parameters
   py$modelname <- reticulate::r_to_py(modelname)
   py$searchname <- reticulate::r_to_py(searchname)
   
 
   print("Loading new data...")
-  reticulate::source_python("inst/python/besceaLoadData.py")
+  # reticulate::source_python("inst/python/besceaLoadData.py")
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaLoadData.py"))
   
   print("Loading search function...")
-  reticulate::source_python("inst/python/besceaSearch.py")
-    
-  # reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaLoadData.py"))
-  # reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaSearch.py"))
-
+  # reticulate::source_python("inst/python/besceaSearch.py")
+  reticulate::source_python(paste0(system.file(package = utils::packageName()), "/python/besceaSearch.py"))
+  
+  
 }
 
