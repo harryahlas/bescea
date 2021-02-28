@@ -29,7 +29,7 @@ The code above first tokenizes your text using [SpaCy](https://spacy.io/), then 
 
 Longer queries tend to be more successful than short queries.  If a query like "data science" isn't working, try adding supplemental words to your query, such as "data science statistics code analytics".
 
-![](man/images/search2.png)
+![](man/images/search4.png)
 
 ## Build Model
 
