@@ -58,7 +58,7 @@ besceaApp(data = sneapsters,
 
 ## Requirements
 
-Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy*, *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). Also requires that SpaCy's en_core_web_sm model be installed.
+Requires RStudio (*reticulate* and *tidyverse* packages) and Python (*pandas*, *re*, *spacy 2.3* [3+ will not work], *rank_bm25*, *tqdm*, *pickle*, *numpy*, *gensim*, and *nmslib* modules). Also requires that SpaCy's en_core_web_sm model be installed.
 
 ## Acknowledgements
 
