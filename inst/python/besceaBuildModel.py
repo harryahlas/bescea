@@ -29,7 +29,7 @@ text_list = df_docs.text.str.lower().values
 tok_text=[] # for our tokenised corpus
 
 # Tokenising using SpaCy:
-for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner"])):
+for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner", "lemmatizer"])):
   tok = [t.text for t in doc if (t.is_ascii and not t.is_punct and not t.is_space)]
   tok_text.append(tok)
 

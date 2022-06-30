@@ -24,7 +24,7 @@ tok_text=[] # for our tokenised corpus
 print("Tokenizing new data...", flush = True)
 
 # Tokenising using SpaCy:
-for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner"])):
+for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner", "lemmatizer"])):
   tok = [t.text for t in doc if (t.is_ascii and not t.is_punct and not t.is_space)]
   tok_text.append(tok)
 
